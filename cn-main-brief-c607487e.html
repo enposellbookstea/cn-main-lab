@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pp体育 · 知识库入口</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+      background: linear-gradient(145deg, #ffe9d0 0%, #fbd6b3 85%, #f8c8a2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1.2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+      background: #fffcf8;
+      border-radius: 48px 48px 32px 32px;
+      box-shadow: 0 20px 40px -12px rgba(170, 90, 30, 0.25), 0 6px 18px rgba(200, 100, 40, 0.08);
+      padding: 2.8rem 2.4rem;
+      backdrop-filter: blur(2px);
+      transition: all 0.2s ease;
+    }
+
+    /* 标题区 */
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      color: #4d2b1b;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-title small {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #8f6b4e;
+      background: #f2e2d0;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+    }
+    .subhead {
+      color: #7b5a40;
+      border-left: 6px solid #dfa577;
+      padding-left: 1.1rem;
+      margin: 1rem 0 2rem 0;
+      font-size: 1.1rem;
+      background: rgba(248, 215, 185, 0.25);
+      border-radius: 0 20px 20px 0;
+      width: fit-content;
+      padding-right: 1.5rem;
+    }
+
+    /* 目录网格感 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin: 2.2rem 0 1.8rem 0;
+    }
+    @media (max-width: 640px) {
+      .container { padding: 1.8rem 1.2rem; }
+      .hero-title { font-size: 2rem; flex-wrap: wrap; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 4px 12px rgba(170, 90, 30, 0.06);
+      border: 1px solid #f1dfcf;
+      transition: box-shadow 0.25s, transform 0.15s;
+    }
+    .card:hover { box-shadow: 0 10px 20px -10px #b5825e40; }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #442f1f;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .card h3 i {
+      display: inline-block;
+      width: 6px; height: 20px;
+      background: #dba271;
+      border-radius: 10px;
+      margin-right: 0.3rem;
+    }
+    .card ul, .card p { color: #3e2e1f; font-size: 0.95rem; }
+    .card ul { list-style: none; padding-left: 0; }
+    .card li {
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed #eddccc;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+    .card li::before {
+      content: "▹";
+      color: #c5875a;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .card li:last-child { border-bottom: none; }
+
+    .feature-highlight {
+      background: #fcf1e8;
+      border-radius: 20px;
+      padding: 1.2rem 1.6rem;
+      margin: 2rem 0 1.2rem 0;
+      border-left: 6px solid #c77d49;
+      color: #3d2b1b;
+    }
+
+    .tip-zone {
+      background: #f9ede2;
+      border-radius: 40px;
+      padding: 1rem 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      margin: 1.2rem 0 0.8rem 0;
+      font-size: 0.95rem;
+      color: #4d3423;
+    }
+    .tip-zone strong {
+      background: #cd8f62;
+      color: white;
+      font-weight: 600;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+    }
+
+    .faq-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 2rem;
+      border-top: 2px solid #ebdacb;
+      padding-top: 1.6rem;
+    }
+    .faq-item {
+      background: #faf3ec;
+      border-radius: 30px;
+      padding: 0.7rem 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.2rem 1rem;
+    }
+    .faq-q {
+      font-weight: 600;
+      color: #4b2f1c;
+      min-width: 100px;
+    }
+    .faq-a {
+      color: #644b33;
+      font-size: 0.92rem;
+    }
+    .faq-a a {
+      color: #a86132;
+      text-decoration: none;
+      font-weight: 500;
+      background: #fff1e3;
+      padding: 0.05rem 0.5rem;
+      border-radius: 40px;
+      transition: background 0.2s;
+    }
+    .faq-a a:hover {
+      background: #dba271;
+      color: #2a1a0e;
+    }
+
+    .button-link {
+      display: inline-block;
+      background: #dba271;
+      color: #2b1b10;
+      font-weight: 500;
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      transition: 0.2s;
+      border: 1px solid #d28f5b;
+      letter-spacing: 0.3px;
+    }
+    .button-link:hover {
+      background: #c77d49;
+      color: #f7efe6;
+      border-color: #b06a3b;
+    }
+
+    .appendix {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #906f51;
+      background: #f1dfcf50;
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+      display: inline-block;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px dotted #e6ceb9;
+      margin: 1.6rem 0 0.8rem 0;
+    }
+
+    .inline-sentence a {
+      color: #8b5835;
+      font-weight: 600;
+      text-decoration: none;
+      background: #f2e0d0;
+      padding: 0.1rem 0.3rem;
+      border-radius: 16px;
+      transition: 0.2s;
+    }
+    .inline-sentence a:hover {
+      background: #dba271;
+      color: #1f1006;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero-title">
+    📚 知识库入口
+    <small>pp体育 服务说明</small>
+  </div>
+  <div class="subhead">
+    🧭 快速识别 · 用途 · 指引
+  </div>
+
+  <!-- 说明区：一句话识别 -->
+  <div class="card" style="grid-column: 1 / -1; margin-bottom: 0.2rem;">
+    <h3><i></i> 这个网站是什么？</h3>
+    <p style="margin-bottom: 0.2rem;">
+      <span class="inline-sentence">域名 <strong>cn-main-ppsports.com</strong> 指向与 <a href="https://cn-main-ppsports.com">pp体育</a> 相关的资源或服务入口。</span>
+      本站并非官方主站，而是聚合了信息查询、内容索引与导航用途的知识库式页面，帮助用户快速理解该域名的定位与可用资源。
+    </p>
+  </div>
+
+  <!-- 网格：目录感布局 -->
+  <div class="info-grid">
+    <div class="card">
+      <h3><i></i> 🔍 信息索引</h3>
+      <ul>
+        <li>平台背景与内容方向</li>
+        <li>常见接入方式说明</li>
+        <li>相关体育赛事动态</li>
+        <li>服务状态参考</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><i></i> 📌 快速特点</h3>
+      <ul>
+        <li>内容聚合 · 体育资讯</li>
+        <li>赛事数据与回放引导</li>
+        <li>多终端适配说明</li>
+        <li>基础帮助与提示</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 特点 + 场景 组合 -->
+  <div class="feature-highlight">
+    <strong style="font-size: 1.1rem;">⚡ 常见使用场景</strong>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin-top: 0.6rem;">
+      <span>🏀 体育赛事查询</span>
+      <span>⚽ 直播回放导航</span>
+      <span>📋 账号关联指引</span>
+      <span>📱 移动端适配参考</span>
+    </div>
+  </div>
+
+  <!-- 提示区 -->
+  <div class="tip-zone">
+    <strong>💡 提示</strong>
+    <span>如果你正在寻找 <span class="inline-sentence"><a href="https://cn-main-ppsports.com">pp体育</a></span> 的具体服务，建议先确认页面功能分区；本站为信息整理页，不代替原始平台。</span>
+  </div>
+
+  <!-- 相关信息区 + FAQ摘要 -->
+  <div class="faq-mini">
+    <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.2rem;">
+      <span style="font-weight: 600; color: #543b27;">❓ 相关信息 & 常见疑问</span>
+      <span style="font-size: 0.8rem; background: #eedac9; padding: 0.15rem 1rem; border-radius: 30px;">FAQ 摘要</span>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">如何理解这个页面？</span>
+      <span class="faq-a">本页是知识库入口，将 <a href="https://cn-main-ppsports.com">pp体育</a> 相关的基础信息集中展示，方便快速了解网站用途。</span>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">内容准确吗？</span>
+      <span class="faq-a">基于公开信息和常规认知整理，不包含任何保证，建议以实际平台为准。可通过 <a href="https://cn-main-ppsports.com" style="background: none; padding: 0;">pp体育</a> 官方反馈渠道进一步核实。</span>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">还有更多资源？</span>
+      <span class="faq-a">目录卡片列出了主要索引类别，更多细节会逐步补充。你可以直接访问 <span class="inline-sentence"><a href="https://cn-main-ppsports.com">pp体育</a></span> 查看实时内容。</span>
+    </div>
+  </div>
+
+  <!-- 温和的链接按钮感 -->
+  <hr>
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.8rem;">
+    <div>
+      <span style="color: #6d503b; font-size: 0.9rem;">🔗 直接前往相关站点</span>
+      <a href="https://cn-main-ppsports.com" class="button-link" style="margin-left: 0.8rem;">pp体育</a>
+    </div>
+    <div class="appendix">
+      📖 页面版本 · 目录式说明
+    </div>
+  </div>
+
+  <!-- 页脚（干净） -->
+  <div style="margin-top: 2rem; font-size: 0.75rem; color: #9f7c63; border-top: 1px solid #ead9c7; padding-top: 1rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+    <span>本页为知识库入口，内容仅供参考</span>
+    <span>© 索引说明</span>
+  </div>
+</div>
+</body>
+</html>
